@@ -18,7 +18,7 @@ namespace fs = std::filesystem;
 
 #include "win_cpp_crypt.h"
 
-int calsulate_sha256(const string& input_file)
+int calculate_sha256(const string& input_file)
 {
     ifstream ifs(input_file, std::ios::binary);
 
@@ -51,7 +51,7 @@ int calsulate_sha256(const string& input_file)
         return 1;
     }
 
-    cout << input_file << ": " << WinCppCrypt::Util::toHexString(sha.unwrap()) << endl;
+    cout << WinCppCrypt::Util::toHexString(sha.unwrap()) << " " << input_file << endl;
 
     return 0;
 }
@@ -60,15 +60,18 @@ int main(int argc, char* argv[])
 {
     try
     {
-        if (argc != 2)
+        if (argc < 2)
         {
             cerr << "Usage:" << endl
-                << "    sha <input_file>" << endl;
+                << "    sha <input_file_1> [input_file_2...]" << endl;
 
             return 1;
         }
 
-        return calsulate_sha256(argv[1]);
+        for (int i = 1; i < argc; ++i)
+        {
+            calculate_sha256(argv[i]);
+        }
 
     }
     catch (const std::exception& e)
