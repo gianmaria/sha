@@ -1,0 +1,35 @@
+{
+    "tasks": [
+        {
+            "label": "Build Debug",
+            "type": "process",
+            "command": "build.bat",
+            "args": [
+                "debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Use this for building"
+        },
+        {
+            "label": "Run Debug executable",
+            "type": "shell",
+            "command": "${workspaceFolder}\\build\\debug\\komp.exe",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Run the built executable after building."
+        }
+    ],
+    "version": "2.0.0"
+}
